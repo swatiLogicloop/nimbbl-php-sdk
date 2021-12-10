@@ -14,7 +14,7 @@ final class RefundTest extends TestCase
     {
         $api = new NimbblApi('access_key_1MwvMkKkweorz0ry', 'access_secret_81x7ByYkRpB4g05N');
 
-        $refundId = 'order_RoQ7Zyy2zagPA0rg-20211007085901';
+        $refundId = 'order_ArL0OKZ5o6kGb0zP-20211210064230';
         $refund = $api->refund->retrieveOne($refundId);
         $this->assertEmpty($refund->error);
         $this->assertEquals($refund->transaction_id, $refundId);
@@ -45,20 +45,20 @@ final class RefundTest extends TestCase
     {
         $api = new NimbblApi('access_key_1MwvMkKkweorz0ry', 'access_secret_81x7ByYkRpB4g05N');
 
-        $orderId = 'order_RoQ7Zyy2zagPA0rg';
+        $orderId = 'order_ArL0OKZ5o6kGb0zP';
         $refunds = $api->refund->retrieveRefundByOrderId($orderId);
         
-        $this->assertLessThan(sizeof($refunds['items']),0);
+        $this->assertLessThan(sizeof($refunds->attributes),0);
     }
 
     public function testRetrieveRefundByTxnId(): void
     {
         $api = new NimbblApi('access_key_1MwvMkKkweorz0ry', 'access_secret_81x7ByYkRpB4g05N');
 
-        $refundId = 'order_aKQvPpdLZbmMkv9z-20210707111956';
+        $refundId = 'order_ArL0OKZ5o6kGb0zP-20211210060349';
         $refunds = $api->refund->retrieveRefundByTxnId($refundId);
         
-        $this->assertLessThan(sizeof($refunds['items']),0);
+        $this->assertLessThan(sizeof($refunds->attributes),0);
     }
     
 }
