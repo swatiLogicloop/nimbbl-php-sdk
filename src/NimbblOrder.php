@@ -21,7 +21,7 @@ class NimbblOrder extends NimbblEntity implements JsonSerializable
     {
         $f = base64_encode($this->buildHttpQuery($options));
         $nimbblRequest = new NimbblRequest();
-        $manyEntities = $nimbblRequest->request('GET', 'orders/many?f=' . $f . '&pt=no');
+        $manyEntities = $nimbblRequest->request('GET', '/api/orders/many?f=' . $f . '&pt=no');
 
         $users = array();
         foreach ($manyEntities['items'] as $idx => $oneEntity) {
@@ -49,7 +49,7 @@ class NimbblOrder extends NimbblEntity implements JsonSerializable
                 ],
         ));
 
-        $createdEntity = $nimbblRequest->request('POST', 'v2/create-order', $attributes);
+        $createdEntity = $nimbblRequest->request('POST', '/api/v2/create-order', $attributes);
         
         $newCreatedEntity = new NimbblOrder();
         if (key_exists('error', $createdEntity)) {
@@ -100,7 +100,7 @@ class NimbblOrder extends NimbblEntity implements JsonSerializable
     public function retrieveOne($id)
     {
         $nimbblRequest = new NimbblRequest();
-        $oneEntity = $nimbblRequest->request('GET', 'v2/get-order/' . $id);
+        $oneEntity = $nimbblRequest->request('GET', '/api/v2/get-order/' . $id);
         $loadedEntity = $this->fillOne($oneEntity);
         $this->attributes = $loadedEntity->attributes;
         $this->error = $loadedEntity->error;

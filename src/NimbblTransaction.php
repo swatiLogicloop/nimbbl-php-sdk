@@ -18,7 +18,7 @@ class NimbblTransaction extends NimbblEntity implements JsonSerializable
     public function retrieveOne($id)
     {
         $nimbblRequest = new NimbblRequest();
-        $oneEntity = $nimbblRequest->request('GET', 'v2/fetch-transaction/' . $id);
+        $oneEntity = $nimbblRequest->request('GET', '/api/v2/fetch-transaction/' . $id);
         $loadedEntity = $this->fillOne($oneEntity);
         $this->attributes = $loadedEntity->attributes;
         $this->error = $loadedEntity->error;
@@ -29,7 +29,7 @@ class NimbblTransaction extends NimbblEntity implements JsonSerializable
     {
         $f = base64_encode($this->buildHttpQuery($options));
         $nimbblRequest = new NimbblRequest();
-        $manyEntities = $nimbblRequest->request('GET', 'transactions/many?f=' . $f . '&pt=no');
+        $manyEntities = $nimbblRequest->request('GET', '/api/transactions/many?f=' . $f . '&pt=no');
 
         $users = array();
         foreach ($manyEntities['items'] as $idx => $oneEntity) {
@@ -99,7 +99,7 @@ class NimbblTransaction extends NimbblEntity implements JsonSerializable
     public function retrieveTransactionByOrderId($id)
     {
         $nimbblRequest = new NimbblRequest();
-        $manyEntities = $nimbblRequest->request('GET', 'v2/order/fetch-transactions/' . $id);
+        $manyEntities = $nimbblRequest->request('GET', '/api/v2/order/fetch-transactions/' . $id);
         
         $newResponse = new NimbblTransaction();
         if (key_exists('error', $manyEntities)) {

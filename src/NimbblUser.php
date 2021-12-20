@@ -17,7 +17,7 @@ class NimbblUser extends NimbblEntity implements JsonSerializable
     public function retrieveOne($id)
     {
         $nimbblRequest = new NimbblRequest();
-        $oneEntity = $nimbblRequest->request('GET', 'users/one/' . $id);
+        $oneEntity = $nimbblRequest->request('GET', '/api/users/one/' . $id);
         $loadedEntity = $this->fillOne($oneEntity);
         $this->attributes = $loadedEntity->attributes;
         $this->error = $loadedEntity->error;
@@ -28,7 +28,7 @@ class NimbblUser extends NimbblEntity implements JsonSerializable
     {
         $f = base64_encode($this->buildHttpQuery($options));
         $nimbblRequest = new NimbblRequest();
-        $manyEntities = $nimbblRequest->request('GET', 'users/many?f=' . $f . '&pt=no');
+        $manyEntities = $nimbblRequest->request('GET', '/api/users/many?f=' . $f . '&pt=no');
         $users = array();
         foreach ($manyEntities['items'] as $idx => $oneEntity) {
             $users[] = $this->fillOne($oneEntity);

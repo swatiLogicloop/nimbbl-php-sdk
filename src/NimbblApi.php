@@ -4,7 +4,7 @@ namespace Nimbbl\Api;
 
 class NimbblApi
 {
-    protected static $baseUrl = 'https://uatapi.nimbbl.tech/api/';
+    protected static $baseUrl = 'https://uatapi.nimbbl.tech';
 
     protected static $key;
 
@@ -96,7 +96,7 @@ class NimbblApi
 
     public static function getTokenEndpoint()
     {
-        return self::getBaseUrl() . 'v2/generate-token';
+        return self::getBaseUrl() . '/api/v2/generate-token';
     }
 
     public static function getFullUrl($relativeUrl)
